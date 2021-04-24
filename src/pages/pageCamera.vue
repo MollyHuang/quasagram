@@ -1,5 +1,5 @@
 <template>
-  <q-page class="constrain q-pa-md">
+  <q-page class="constrain-more q-pa-md">
     
     <div class="camera-frame q-pa-md">
       <img class="full-width" src="https://cdn.quasar.dev/img/parallax2.jpg" />
@@ -12,6 +12,37 @@
         size="lg"
         round
       />
+      <div class="row justify-center q-ma-md">
+        <q-input
+          class="col col-sm-6"
+          label="Caption"
+          dense
+        />
+      </div>
+      <div class="row justify-center q-ma-md">
+        <q-input
+          class="col col-sm-6"
+          label="Location"
+          dense
+        >
+          <template v-slot:append>
+            <q-btn
+              icon="eva-navigation-2-outline"
+              dense
+              flat
+              round
+            />
+          </template>
+        </q-input>
+      </div>
+      <div class="row justify-center q-mt-lg">
+        <q-btn
+          color="primary"
+          label="Post Image"
+          rounded
+          unelevated
+        />
+      </div>
     </div>
   </q-page>
 </template>
