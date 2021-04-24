@@ -18,12 +18,24 @@
 
     <div class="text-center q-pa-md">
       <q-btn
+        v-if="hasCameraSupport"
         @click="captureImage"
         color="grey-10"
         icon="eva-camera"
         size="lg"
         round
       />
+      <q-file
+        v-else
+        v-model="imageUpload"
+        label="Choose an image"
+        accept="images/*"
+        outlined
+      >
+        <template v-slot:prepend>
+          <q-icon name="eva-attach-outline" />
+        </template>
+      </q-file>
       <div class="row justify-center q-ma-md">
         <q-input
           v-model="post.caption"
@@ -65,7 +77,6 @@
 import { uid } from 'quasar'
 require('md-gum-polyfill')
 
-
 export default {
   name: 'PageCamera',
   data() {
@@ -77,7 +88,9 @@ export default {
         photo: null,
         date: Date.now()
       },
-      imageCaptured: false
+      imageCaptured: false,
+      imageUpload: [],
+      hasCameraSupport: true,
     }
   },
   methods: {
@@ -87,6 +100,8 @@ export default {
         video: true
       }).then(stream => {
         this.$refs.video.srcObject = stream
+      }).catch(error => {
+        this.hasCameraSupport = false
       })
     },
     captureImage() {
