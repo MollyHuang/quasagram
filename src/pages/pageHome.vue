@@ -1,7 +1,7 @@
 <template>
   <q-page class="constrain q-pa-md">
     <q-card class="card-post" flat bordered>
-      
+
       <q-item>
         <q-item-section avatar>
           <q-avatar>
@@ -17,6 +17,8 @@
 
       <q-separator />
 
+      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+
     </q-card>
   </q-page>
 </template>
@@ -26,3 +28,9 @@ export default {
   name: 'PageHome'
 }
 </script>
+
+<style lang="sass">
+  .card-post
+    .q-img
+      min-height: 200px
+</style>
