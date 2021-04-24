@@ -28,8 +28,9 @@
       <q-file
         v-else
         v-model="imageUpload"
+        @input="captureImageFallback"
         label="Choose an image"
-        accept="images/*"
+        accept="image/*"
         outlined
       >
         <template v-slot:prepend>
@@ -114,6 +115,26 @@ export default {
       context.drawImage(video, 0, 0, canvas.width, canvas.height)
       this.imageCaptured = true
       this.post.photo = this.dataURItoBlob(canvas.toDataURL())
+    },
+    captureImageFallback(file) {
+      console.log("file: ", file)
+      this.post.photo = file
+
+      let canvas = this.$refs.canvas
+      let context = canvas.getContext('2d')
+
+      var reader = new FileReader()
+      reader.onload = event => {
+        var img = new Image()
+        img.onload = () => {
+          canvas.width = img.width
+          canvas.height = img.height
+          context.drawImage(img,0,0)
+          this.imageCaptured = true
+        }
+        img.src = event.target.result
+      }
+      reader.readAsDataURL(file)
     },
     dataURItoBlob(dataURI) {
       // convert base64 to raw binary data held in a string
