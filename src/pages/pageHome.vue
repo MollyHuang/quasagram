@@ -1,6 +1,12 @@
 <template>
   <q-page class="constrain q-pa-md">
-    <q-card class="card-post" flat bordered>
+    <q-card
+      v-for="post in posts"
+      :key="post.id"
+      class="card-post q-mb-md"
+      bordered
+      flat
+    >
 
       <q-item>
         <q-item-section avatar>
@@ -11,17 +17,17 @@
 
         <q-item-section>
           <q-item-label class="text-bold">Molly Huang</q-item-label>
-          <q-item-label caption>Taipei, Taiwan</q-item-label>
+          <q-item-label caption>{{ post.location }}</q-item-label>
         </q-item-section>
       </q-item>
 
       <q-separator />
 
-      <q-img src="https://cdn.quasar.dev/img/parallax2.jpg" />
+      <q-img :src="post.imageUrl" />
 
       <q-card-section>
-        <div class="">Golden Gate Bridge</div>
-        <div class="text-caption text-grey">June 10 9:04AM</div>
+        <div class="">{{ post.caption }}</div>
+        <div class="text-caption text-grey">{{ post.date | niceDate }}</div>
       </q-card-section>
 
     </q-card>
@@ -29,6 +35,8 @@
 </template>
 
 <script>
+import { date } from 'quasar'
+
 export default {
   name: 'PageHome',
   data() {
@@ -63,6 +71,11 @@ export default {
           imageUrl: 'https://cdn.quasar.dev/img/parallax2.jpg'
         }
       ]
+    }
+  },
+  filters: {
+    niceDate(value) {
+      return date.formatDate(value, 'MMMM D h:mmA')
     }
   }
 }
