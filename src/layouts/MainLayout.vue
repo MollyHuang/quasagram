@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn
           to="/camera"
-          class="q-mr-sm"
+          class="large-screen-only q-mr-sm"
           icon="eva-camera-outline"
           size="18px"
           flat
@@ -24,6 +24,7 @@
 
         <q-btn
           to="/"
+          class="large-screen-only"
           icon="eva-home-outline"
           size="18px"
           flat
@@ -35,7 +36,7 @@
     </q-header>
 
     <q-footer
-      class="bg-white"
+      class="bg-white small-screen-only"
       bordered
     >
       <q-tabs
@@ -64,16 +65,20 @@
 export default {
   name: 'MainLayout',
   data () {
-    return {
+    return { 
     }
   }
 }
 </script>
 
-
 <style lang="sass">
+  .q-toolbar
+    @media (min-width: $breakpoint-sm-min)
+      height: 77px
   .q-toolbar__title
     font-size: 30px
+    @media (max-width: $breakpoint-xs-max)
+      text-align: center
   .q-footer
     .q-tab__icon
       font-size: 30px
