@@ -14,6 +14,7 @@
       />
       <div class="row justify-center q-ma-md">
         <q-input
+          v-model="post.caption"
           class="col col-sm-6"
           label="Caption"
           dense
@@ -21,6 +22,7 @@
       </div>
       <div class="row justify-center q-ma-md">
         <q-input
+          v-model="post.location"
           class="col col-sm-6"
           label="Location"
           dense
@@ -48,8 +50,21 @@
 </template>
 
 <script>
+import { uid } from 'quasar'
+
 export default {
-  name: 'PageCamera'
+  name: 'PageCamera',
+  data() {
+    return {
+      post: {
+        id: uid(),
+        caption: '',
+        location: '',
+        photo: null,
+        date: Date.now()
+      }
+    }
+  }
 }
 </script>
 
