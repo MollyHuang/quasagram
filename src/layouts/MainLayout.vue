@@ -1,17 +1,41 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header class="bg-white text-grey-10" bordered>
       <q-toolbar>
+        <q-btn
+          to="/camera"
+          class="q-mr-sm"
+          icon="eva-camera-outline"
+          size="18px"
+          flat
+          round
+          dense
+        />
+
+        <q-separator
+          class="large-screen-only"
+          vertical
+          spaced
+        />
 
         <q-toolbar-title class="text-grand-hotel text-bold">
           Quasagram
         </q-toolbar-title>
 
+        <q-btn
+          to="/"
+          icon="eva-home-outline"
+          size="18px"
+          flat
+          round
+          dense
+        />
+
       </q-toolbar>
     </q-header>
 
     <q-footer
-      class="bg-white small-screen-only"
+      class="bg-white"
       bordered
     >
       <q-tabs
@@ -45,3 +69,12 @@ export default {
   }
 }
 </script>
+
+
+<style lang="sass">
+  .q-toolbar__title
+    font-size: 30px
+  .q-footer
+    .q-tab__icon
+      font-size: 30px
+</style>
