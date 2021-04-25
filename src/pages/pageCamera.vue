@@ -54,6 +54,7 @@
         >
           <template v-slot:append>
             <q-btn
+              @click="getLocation"
               icon="eva-navigation-2-outline"
               dense
               flat
@@ -165,7 +166,14 @@ export default {
       // write the ArrayBuffer to a blob, and you're done
       var blob = new Blob([ab], {type: mimeString});
       return blob;
-    }
+    },
+    getLocation() {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log("[getLocation] position: ", position)
+      }, err => {
+        console.log("err: ", err)
+      }, { timeout: 7000 })
+    },
   },
   mounted() {
     this.initCamera()
