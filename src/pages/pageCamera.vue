@@ -170,9 +170,26 @@ export default {
     getLocation() {
       navigator.geolocation.getCurrentPosition(position => {
         console.log("[getLocation] position: ", position)
+        this.getCityAndCountry(position)
       }, err => {
         console.log("err: ", err)
       }, { timeout: 7000 })
+    },
+    getCityAndCountry(position) {
+      // https://geocode.xyz/25.060869099999998,121.65832010000001?json=1
+      let apiUrl = `https://geocode.xyz/${ position.coords.latitude },${ position.coords.longitude }?json=1`
+      this.$axios.get(apiUrl).then(result => {
+        console.log('[getCityAndCountry] result: ', result)
+        this.locationSuccess(result)
+      }).catch(err => {
+        console.log('err: ', err)
+      })
+    },
+    locationSuccess(result) {
+      this.post.location = result.data.city
+      if (result.data.country) {
+        this.post.location += `, ${ result.data.country }`
+      }
     },
   },
   mounted() {
