@@ -55,7 +55,7 @@
         >
           <template v-slot:append>
             <q-btn
-              v-if="!locationLoading"
+              v-if="locationSupported && !locationLoading"
               @click="getLocation"
               icon="eva-navigation-2-outline"
               dense
@@ -97,6 +97,13 @@ export default {
       hasCameraSupport: true,
       locationLoading: false,
     }
+  },
+  computed: {
+    locationSupported() {
+      // console.log('[locationSupported] navigator: ', navigator)
+      if ('geolocation' in navigator) return true
+      return false
+    },
   },
   methods: {
     initCamera() {
